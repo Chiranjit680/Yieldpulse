@@ -48,6 +48,20 @@ class Portfolio(models.Model):
         
     def __str__(self):
         return str(self.user)
+class InvestmentAdvisoy(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    stock = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(0)])
+    bond = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(0)])
+    mf = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(0)])
+    gold=models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(0)])
+    crypto=models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(0)])
+    
+    def validate_portfolio(self):
+        if self.stock+self.bond+self.mf+self.gold+self.crypto != 100:
+            raise ValueError("Portfolio must add up to 100%")
+        
+    def __str__(self):
+        return str(self.user)
 
 class User_details(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

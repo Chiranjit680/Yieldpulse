@@ -46,4 +46,4 @@ class PortfolioSerializer(serializers.ModelSerializer):
 class User_detail_serializer(serializers.ModelSerializer):
     class Meta:
         model = User_details
-        fields = '__all__'
+        exclude = ('user',)

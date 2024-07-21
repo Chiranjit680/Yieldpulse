@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
      'rest_framework',
+     "rest_framework.authtoken",
     'core_app',
+    'user_app',
 ]
 
 MIDDLEWARE = [
@@ -131,3 +133,9 @@ JAZZMIN_SETTINGS = {
     'login_form_link': '/admin/login/',
     'user_profile_link': '/admin/auth/user/',
 }
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+        
+    ]
+}#if you have more than 1 REST_FRAMEWORK variable 1st one will get overwritten by the second one

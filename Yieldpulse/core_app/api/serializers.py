@@ -46,4 +46,13 @@ class PortfolioSerializer(serializers.ModelSerializer):
 class User_detail_serializer(serializers.ModelSerializer):
     class Meta:
         model = User_details
+        exclude=('user',)
+class InvestmentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = InvestmentAdvisoy
         fields = '__all__'
+    def validate(self, data):
+        total = data.get('stock', 0) + data.get('bond', 0) + data.get('mf', 0) + data.get('gold', 0) + data.get('crypto', 0)
+        if total != 100:
+            raise serializers.ValidationError("Portfolio must add up to 100%")
+        return data
